@@ -1,3 +1,13 @@
+GET http://localhost:5000
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-25T004540.200.txt
+
+###
+
 GET http://localhost:5000/api/users/
 Accept: application/json
 Connection: Keep-Alive
@@ -552,16 +562,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-06-24T213724.404.txt
-
-###
-
-GET http://localhost:5000/api/users/
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-06-24T153243.200.txt
 
 ###
 
