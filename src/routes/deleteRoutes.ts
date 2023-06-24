@@ -1,10 +1,12 @@
 import {IncomingMessage, ServerResponse} from 'http';
 import {urlSlashChecker} from '../utils/index.js';
 import {HttpStatusMessage} from '../entities/enums.js';
+import {deleteUser} from '../db.js';
 
 export const deleteRoutes = (req: IncomingMessage, res: ServerResponse) => {
   if (urlSlashChecker(req.url)?.match(/(\/api\/users\/)([a-z0-9-]+)(\/)/)?.[0]) {
-    if (true) { // todo: delete user in db
+    const id = urlSlashChecker(req.url)?.match(/(\/api\/users\/)(.*)(\/)/)?.[2]
+    if (id && deleteUser(id)) {
       res.statusCode = 200;
       res.end(HttpStatusMessage.deleted);
     } else {
