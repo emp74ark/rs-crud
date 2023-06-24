@@ -1,6 +1,6 @@
 import {IncomingMessage} from 'http';
 import {IRoute} from '../entities/interfaces.js';
-import {urlSlashChecker} from '../utils/urlSlashChecker.js';
+import {urlSlashChecker} from '../utils/index.js';
 
 export const getRoutes = (url: IncomingMessage['url']): IRoute => {
   switch (urlSlashChecker(url)) {
@@ -20,9 +20,10 @@ export const getRoutes = (url: IncomingMessage['url']): IRoute => {
         data: 'Users', // todo: return users
       };
     case urlSlashChecker(url)?.match(/(\/api\/users\/)(.*)(\/)/)?.[0]:
+      console.log(url)
       return {
         code: 200, //todo: code 200 if exist
-        data: 'User', //todo: user info
+        data: urlSlashChecker(url)?.match(/(\/api\/users\/)(.*)(\/)/)?.[2] || '', //todo: user info
       };
     default:
       return {

@@ -1,19 +1,18 @@
 import { createServer } from 'http';
 import { msgHttpStart, msgServerError } from './messages.js';
-import {getRoutes} from './routes/index.js';
+import { getRoutes, postRoutes } from './routes/index.js';
 
 export const httpServer = (port: number, host: string, backlog: number) => {
   createServer((req, res) => {
     try {
       switch (req.method) {
         case 'GET':
-          const {code, data} = getRoutes(req.url)
+          const { code, data } = getRoutes(req.url);
           res.statusCode = code;
           res.end(data);
           break;
         case 'POST':
-          res.statusCode = 200;
-          res.end('success');
+          postRoutes(req, res);
           break;
         case 'PUT':
           res.statusCode = 200;
