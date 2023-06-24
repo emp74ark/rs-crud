@@ -14,7 +14,7 @@
     "noImplicitAny": true,
     "skipLibCheck": true
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
   "exclude": ["node_modules", "coverage"],
   "ts-node": {
     "esm": true
