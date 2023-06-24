@@ -30,5 +30,9 @@ export enum HttpStatusMessage {
     'deleted' = 'Deleted successfully',
     'userNotFound' = 'User not found',
     'srcNotFound' = 'Source not found',
-    'wrongBody' = 'Body does not contain required fields'
+    'wrongBody' = 'Body does not contain required fields',
+    'invalidId' = 'User id is invalid',
+    'apiGreeting' = 'API works!',
+    'added' = 'New user successfully added to DB',
+    'updated' = 'User was successfully updated'
 }

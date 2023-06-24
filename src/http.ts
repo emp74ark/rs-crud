@@ -1,11 +1,6 @@
 import { createServer } from 'http';
 import { msgHttpStart, msgServerError } from './messages.js';
-import {
-  deleteRoutes,
-  getRoutes,
-  postRoutes,
-  putRoutes,
-} from './routes/index.js';
+import { deleteRoutes, getRoutes, postRoutes, putRoutes } from './routes/index.js';
 
 export const httpServer = (port: number, host: string, backlog: number) => {
   createServer((req, res) => {
@@ -23,7 +18,7 @@ export const httpServer = (port: number, host: string, backlog: number) => {
           putRoutes(req, res);
           break;
         case 'DELETE':
-          deleteRoutes(req, res)
+          deleteRoutes(req, res);
           break;
         default:
           res.statusCode = 400;
@@ -33,7 +28,7 @@ export const httpServer = (port: number, host: string, backlog: number) => {
       if (e) {
         msgServerError(e);
         res.statusCode = 500;
-        res.end('Server error');
+        res.end(`Unfortunately error happens at the server. Error: ${e}`);
       }
     }
   }).listen(port, host, backlog, () => {

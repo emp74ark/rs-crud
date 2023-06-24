@@ -1,13 +1,8 @@
 import { IUser } from './entities/interfaces.js';
+import {bodyChecker} from './utils/index.js';
+import {v4 as uuid} from 'uuid'
 
-export let db: IUser[] = [
-  {
-    id: "12345",
-    username: "UserName",
-    age: 100,
-    hobbies: ["hobby1"]
-  }
-];
+export let db: IUser[] = [];
 
 export const getAllUsers = () => {
   return JSON.stringify(db);
@@ -18,12 +13,15 @@ export const getUserById = (id: string) => {
   if (user) return JSON.stringify(user);
 };
 
-export const addUser = (user: IUser) => {
-  try {
-    db.push(user);
+export const addUser = (user: Omit<IUser, 'id'>) => {
+  if (bodyChecker(user)) {
+    db.push({
+      id: uuid(),
+      ...user,
+    });
     return true;
-  } catch (e) {
-    if (e) return false;
+  } else {
+    return false;
   }
 };
 
