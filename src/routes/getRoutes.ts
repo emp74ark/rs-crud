@@ -1,6 +1,7 @@
 import {IncomingMessage} from 'http';
 import {IRoute} from '../entities/interfaces.js';
 import {urlSlashChecker} from '../utils/index.js';
+import {HttpStatusMessage} from '../entities/enums.js';
 
 export const getRoutes = (url: IncomingMessage['url']): IRoute => {
   switch (urlSlashChecker(url)) {
@@ -28,7 +29,7 @@ export const getRoutes = (url: IncomingMessage['url']): IRoute => {
     default:
       return {
         code: 404,
-        data: 'Source not found'
+        data: HttpStatusMessage.srcNotFound
       }
   }
 }

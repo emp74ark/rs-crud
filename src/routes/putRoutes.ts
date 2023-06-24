@@ -1,6 +1,7 @@
 import {IncomingMessage, ServerResponse} from 'http';
 import {urlSlashChecker} from '../utils/index.js';
 import {IUser} from '../entities/interfaces.js';
+import {HttpStatusMessage} from '../entities/enums.js';
 
 export const putRoutes = (req: IncomingMessage, res: ServerResponse) => {
   if (urlSlashChecker(req.url)?.match(/(\/api\/users\/)([a-z0-9-]+)(\/)/)?.[0]) {
@@ -14,14 +15,14 @@ export const putRoutes = (req: IncomingMessage, res: ServerResponse) => {
       const updated = {...body}
       if (updated){
         res.statusCode = 200;
-        res.end(JSON.stringify(body)); // todo: Update successfully
+        res.end(JSON.stringify(body)); // todo: Update successfully?
       } else {
         res.statusCode = 404;
-        res.end('User not found');
+        res.end(HttpStatusMessage.userNotFound);
       }
     });
   } else {
     res.statusCode = 404;
-    res.end('Source not found');
+    res.end(HttpStatusMessage.srcNotFound);
   }
 }

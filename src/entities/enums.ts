@@ -25,3 +25,10 @@ export enum Color {
     BgWhite = "\x1b[47m",
     BgGray = "\x1b[100m",
 }
+
+export enum HttpStatusMessage {
+    'deleted' = 'Deleted successfully',
+    'userNotFound' = 'User not found',
+    'srcNotFound' = 'Source not found',
+    'wrongBody' = 'Body does not contain required fields'
+}

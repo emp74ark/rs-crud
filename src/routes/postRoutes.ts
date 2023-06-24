@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { bodyChecker, urlSlashChecker } from '../utils/index.js';
 import {IUser} from '../entities/interfaces.js';
+import {HttpStatusMessage} from '../entities/enums.js';
 
 export const postRoutes = (req: IncomingMessage, res: ServerResponse) => {
   if (urlSlashChecker(req.url) === '/api/users/') {
@@ -15,11 +16,11 @@ export const postRoutes = (req: IncomingMessage, res: ServerResponse) => {
         res.end(JSON.stringify(body));
       } else {
         res.statusCode = 400;
-        res.end('Body does not contain required fields');
+        res.end(HttpStatusMessage.wrongBody);
       }
     });
   } else {
     res.statusCode = 404;
-    res.end('Source not found');
+    res.end(HttpStatusMessage.srcNotFound);
   }
 };
