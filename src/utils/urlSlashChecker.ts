@@ -5,4 +5,4 @@ export const urlSlashChecker = (url?: string) => {
     return url + '/';
   }
   return url;
-}
+};

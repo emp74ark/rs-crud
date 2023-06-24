@@ -1,6 +1,6 @@
 import { IUser } from './entities/interfaces.js';
-import {bodyChecker} from './utils/index.js';
-import {v4 as uuid} from 'uuid'
+import { bodyChecker } from './utils/index.js';
+import { v4 as uuid } from 'uuid';
 
 export let db: IUser[] = [];
 
@@ -46,5 +46,5 @@ export const deleteUser = (id: string) => {
     db = db.filter((el) => el.id !== id);
     return true;
   }
-  return false
+  return false;
 };
