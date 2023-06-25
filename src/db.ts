@@ -1,8 +1,13 @@
 import { IUser } from './entities/interfaces.js';
 import { bodyChecker } from './utils/index.js';
 import { v4 as uuid } from 'uuid';
+import { workersSync } from "./utils/workersSync.js";
 
 export let db: IUser[] = [];
+
+export const updateDb = (values: IUser[]) => {
+  db = values
+}
 
 export const getAllUsers = () => {
   return JSON.stringify(db);
@@ -15,10 +20,10 @@ export const getUserById = (id: string) => {
 
 export const addUser = (user: Omit<IUser, 'id'>) => {
   if (bodyChecker(user)) {
-    db.push({
-      id: uuid(),
-      ...user,
-    });
+    workersSync([
+      ...db,
+      {id: uuid(), ...user}
+    ])
     return true;
   } else {
     return false;
@@ -30,8 +35,10 @@ export const updateUser = (id: string, data: Partial<IUser>) => {
     const user = db.find((el) => el.id === id);
     if (user) {
       const updated = { ...user, ...data };
-      db = db.filter((el) => el.id !== updated.id);
-      db.push(updated);
+      workersSync([
+        ...db.filter((el) => el.id !== updated.id),
+        updated
+      ]);
       return true;
     }
     return false;
@@ -43,7 +50,7 @@ export const updateUser = (id: string, data: Partial<IUser>) => {
 export const deleteUser = (id: string) => {
   const user = db.find((el) => el.id === id);
   if (user) {
-    db = db.filter((el) => el.id !== id);
+    workersSync(db.filter((el) => el.id !== id))
     return true;
   }
   return false;

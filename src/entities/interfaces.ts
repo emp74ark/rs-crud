@@ -9,3 +9,8 @@ export interface IUser {
   age: number;
   hobbies: string[];
 }
+
+export interface ClusterMessage {
+  type: string;
+  payload: IUser[];
+}
